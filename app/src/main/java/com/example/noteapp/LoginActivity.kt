@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.noteapp.R
@@ -25,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
         val emailField = findViewById<EditText>(R.id.emailField)
         val passwordField = findViewById<EditText>(R.id.passwordField)
         val loginButton = findViewById<Button>(R.id.loginButton)
-        val signUpButton = findViewById<Button>(R.id.signUpButton)
+        val signUpButton = findViewById<TextView>(R.id.signUpButton)
 
         // Login button listener
         loginButton.setOnClickListener {
@@ -36,18 +37,8 @@ class LoginActivity : AppCompatActivity() {
             // Checking if email and password are provided
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Attempt to sign in the user using Firebase Authentication
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        // Checking if the login was successful
-                        if (task.isSuccessful) {
-                            // Display success message and navigate to the NotesActivity
-                            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, NotesActivity::class.java))
-                        } else {
-                            // Display error message if login failed
-                            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                        }
-                    }
+                //paste login in logic here
+
             } else {
                 // Display message if email or password is not entered
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()

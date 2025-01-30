@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.noteapp.R
@@ -28,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
         val passwordField = findViewById<EditText>(R.id.passwordField)
         val confirmPasswordField = findViewById<EditText>(R.id.confirmPasswordField)
         val signUpButton = findViewById<Button>(R.id.signUpButton)
-        val loginButton = findViewById<Button>(R.id.loginButton)
+        val loginButton = findViewById<TextView>(R.id.loginButton)
 
         // SignUp button listener
         signUpButton.setOnClickListener {
@@ -44,18 +45,8 @@ class SignUpActivity : AppCompatActivity() {
                 // Checking if password and confirm password match
                 if (password == confirmPassword) {
                     // Creating a new user with email and password using Firebase Authentication
-                    auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            // Checking if the user creation was successful
-                            if (task.isSuccessful) {
-                                // Display success message and navigate to the NotesActivity
-                                Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
-                                startActivity(Intent(this, NotesActivity::class.java))
-                            } else {
-                                // Display error message if user creation failed
-                                Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
-                            }
-                        }
+                    //paste here sign up logic
+
                 } else {
                     // Display message if passwords do not match
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()

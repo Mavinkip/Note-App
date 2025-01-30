@@ -43,16 +43,8 @@ class NotesActivity : AppCompatActivity() {
 
             // Check if user is authenticated and the note is not empty
             if (userId != null && note.isNotEmpty()) {
-                // Save the note to Firestore under the user's ID
-                db.collection("notes").document(userId)
-                    .set(mapOf("note" to note)) // Store the note with the user's ID
-                    .addOnSuccessListener {
-                        Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show() // Show success message
-                        fetchNote() // Refresh the displayed note
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() // Show error message if save fails
-                    }
+                // Save the note to Firestore under the user's
+                //paste saving logic here
             }
         }
     }
@@ -62,21 +54,8 @@ class NotesActivity : AppCompatActivity() {
         val userId = auth.currentUser?.uid // Get the current user ID
         if (userId != null) {
             // Fetch the note from Firestore for the current user
-            db.collection("notes").document(userId).get()
-                .addOnSuccessListener { document ->
-                    // Check if the document exists in Firestore
-                    if (document.exists()) {
-                        // Get the note from Firestore and display it
-                        val note = document.getString("note")
-                        noteTextView.text = note ?: "No note found." // Display the note or a message if no note exists
-                    } else {
-                        // If no note exists, display "No note found."
-                        noteTextView.text = "No note found."
-                    }
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() // Show error message if fetch fails
-                }
+            //paste fetching logic hee
+
         }
     }
 }
