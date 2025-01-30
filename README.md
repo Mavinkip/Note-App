@@ -281,7 +281,5 @@ db.collection("notes").document(userId).get()
             noteTextView.text = "No note found."  
         }  
     }  
-    .addOnFailureListener { e ->  
-        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() // Show error message if fetch fails  
-    }
+
 ```
