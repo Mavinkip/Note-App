@@ -36,7 +36,18 @@ class LoginActivity : AppCompatActivity() {
             // Checking if email and password are provided
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Attempt to sign in the user using Firebase Authentication
-
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        // Checking if the login was successful
+                        if (task.isSuccessful) {
+                            // Display success message and navigate to the NotesActivity
+                            Toast.makeText(this, "Login Successful!", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(this, NotesActivity::class.java))
+                        } else {
+                            // Display error message if login failed
+                            Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
             } else {
                 // Display message if email or password is not entered
                 Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()

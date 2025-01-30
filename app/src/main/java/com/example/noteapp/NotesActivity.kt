@@ -44,7 +44,15 @@ class NotesActivity : AppCompatActivity() {
             // Check if user is authenticated and the note is not empty
             if (userId != null && note.isNotEmpty()) {
                 // Save the note to Firestore under the user's ID
-
+                db.collection("notes").document(userId)
+                    .set(mapOf("note" to note)) // Store the note with the user's ID
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Note saved!", Toast.LENGTH_SHORT).show() // Show success message
+                        fetchNote() // Refresh the displayed note
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show() // Show error message if save fails
+                    }
             }
         }
     }

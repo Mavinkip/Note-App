@@ -44,7 +44,18 @@ class SignUpActivity : AppCompatActivity() {
                 // Checking if password and confirm password match
                 if (password == confirmPassword) {
                     // Creating a new user with email and password using Firebase Authentication
-
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener { task ->
+                            // Checking if the user creation was successful
+                            if (task.isSuccessful) {
+                                // Display success message and navigate to the NotesActivity
+                                Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
+                                startActivity(Intent(this, NotesActivity::class.java))
+                            } else {
+                                // Display error message if user creation failed
+                                Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 } else {
                     // Display message if passwords do not match
                     Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
